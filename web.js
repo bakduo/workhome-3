@@ -1,9 +1,36 @@
 var express = require('express');
 
+var fs = require('fs');
+
 var app = express.createServer(express.logger());
 
+var error = 0;
+
+var buffer_datos_index;
+
+fs.exists('index.html', function(exists) {
+   if (exists){
+      fs.stat('index.html', function(error, stats) {
+          buffer_datos_index = fs.readFileSync('index.html'); //If the encoding option is specified then this function returns a string. Otherwise it returns a buffer.
+          //var txt = bufferX.toString('utf8');
+          //buf = new Buffer(stats.size);
+          //buf.write(txt,stats.size);
+          //console.log(txt);
+          //console.log(buf.toString('utf8'));
+      });
+     }else{
+      error = 1;
+     }
+});
+
 app.get('/', function(request, response) {
-  response.send('Hello World work home 3!');
+
+  if (error == 1){ 
+        response.send('Hello World work home 3!');
+  }else{
+        response.send(buffer_datos_index.toString('utf8'));
+  }
+  //response.send('Hello World work home 3!');
 });
 
 var port = process.env.PORT || 5000;
