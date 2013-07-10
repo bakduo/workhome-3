@@ -2,3 +2,9 @@ config.sh
 commit.sh
 deploy.sh
 .gitignore
+pushHeroku.sh
+tmp/*/*
+tmp/*
+css/*
+css/
+

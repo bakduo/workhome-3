@@ -23,6 +23,9 @@ fs.exists('index.html', function(exists) {
      }
 });
 
+app.use(app.router); //use both root and other routes below
+app.use(express.static(__dirname + "/css")); //use static files in ROOT/public folder
+
 app.get('/', function(request, response) {
 
   if (error == 1){ 
